@@ -3,7 +3,8 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMainWindow, QPushButton, QAction, QMessageBox, QFileDialog
 from PyQt5.QtGui import QPixmap
-import nDayAverage as generator
+from Calculations import nDayAverage as generator
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):

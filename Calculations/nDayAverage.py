@@ -11,8 +11,6 @@ def last_N_days(days, index, N):
 
 def generate_file(lines, stock_name, days, picture_name):
     N = days
-    my_average = []
-    real = []
     line_count = 0
     dates = []
     real = []

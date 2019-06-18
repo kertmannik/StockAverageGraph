@@ -3,8 +3,9 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog, QApplication, QWidget, QMainWindow, QPushButton, QAction, QMessageBox, QFileDialog
 from PyQt5.QtGui import QPixmap
-import nDayAverage as generator
-import yahoo as yahoo
+from Calculations import nDayAverage as generator
+from Yahoo import request as yahoo
+
 
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
@@ -83,7 +84,7 @@ class Ui_Dialog(object):
                             os.remove(self.temp_picture_name)
                         if not again:
                             self.stock = self.comboBox.currentData()
-                            self.data = yahoo.load_yahoo_quote(self.stock,self.begin, self.end, info = 'quote', format_output = 'list')
+                            self.data = yahoo.load_yahoo_quote(self.stock, self.begin, self.end, info ='quote', format_output ='list')
                         try:
                             days = int(self.daysaverage.text())
                             if days < 2:
