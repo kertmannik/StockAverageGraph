@@ -1,16 +1,10 @@
 from PyQt5 import QtCore, QtWidgets
+from Variables.variables import *
 
 class Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(700, 500)
-
-        self.stock = None
-        self.stock_index = None
-        self.begin = None
-        self.end = None
-        self.data = None
-        self.temp_picture_name = "temp.png"
 
         self.pilt = QtWidgets.QLabel(Dialog)
         self.pilt.setGeometry(QtCore.QRect(14, 5, 671, 431))
@@ -42,11 +36,25 @@ class Dialog(object):
         self.display.setGeometry(QtCore.QRect(620, 440, 71, 31))
         self.display.setObjectName("display")
 
-        self.retranslateUi(Dialog)
+        self.retranslate_ui(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.fill_combobox()
 
-    def retranslateUi(self, Dialog):
+    def retranslate_ui(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "n Days Average"))
         self.uuesti.setText(_translate("Dialog", "Taasarvuta"))
         self.display.setText(_translate("Dialog", "KUVA"))
+
+    def fill_combobox(self):
+        with open(DEFAULT_STOCKS_FILENAME, 'r') as file:
+            file = file.read().replace('\n', 'uusrida')
+            stocks = file.split("uusrida")
+
+        if stocks is not None and len(stocks) > 0:
+            self.comboBox.blockSignals(True)
+            self.comboBox.addItem("")
+            for stock in stocks:
+                data = stock.split(",")
+                self.comboBox.addItem(data[0], data[1])
+            self.comboBox.blockSignals(False)
