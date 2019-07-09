@@ -4,7 +4,9 @@ class Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
         Dialog.resize(700, 500)
+
         self.stock = None
+        self.stock_index = None
         self.begin = None
         self.end = None
         self.data = None
