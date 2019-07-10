@@ -2,9 +2,10 @@ import sys
 import os
 from PyQt5.QtWidgets import QDialog, QApplication, QMessageBox
 from PyQt5.QtGui import QPixmap
-from Calculations import nDayAverage as Generator
 from Yahoo import request as yahoo
 from GUI.design import Dialog
+from GUI.plotGenerator import PlotGenerator
+from Calculations.nDayAverage import MovingAverage
 from Variables.variables import *
 
 
@@ -21,6 +22,9 @@ class AppWindow(QDialog):
         self.stock = None
         self.stock_index = None
         self.data = None
+
+        self.moving_average = MovingAverage()
+        self.plot_generator = PlotGenerator(MovingAverage())
 
         self.ui.uuesti.clicked.connect(lambda: self.display_data(True))
         self.ui.display.clicked.connect(lambda: self.display_data(False))
@@ -42,7 +46,7 @@ class AppWindow(QDialog):
                             self.stock_index = self.ui.comboBox.currentIndex()
                             self.data = yahoo.load_yahoo_quote(self.stock, temp_begin, temp_end, info ='quote', format_output ='list')
                         days = self.set_default_average_days(self.ui.daysaverage.text())
-                        Generator.generate_file(self.data, self.stock, days, DEFAULT_PICTURE_NAME)
+                        self.plot_generator.create_image(self.stock, days, self.data)
                         self.ui.pilt.setScaledContents(True)
                         self.ui.pilt.setPixmap(QPixmap(DEFAULT_PICTURE_NAME))
         except Exception as exception:
