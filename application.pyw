@@ -32,9 +32,9 @@ class AppWindow(QDialog):
     def display_data(self, recalculate):
         try:
             if self.ui.comboBox.currentData() is not None:
-                temp_begin = self.ui.daysbegin.text()
+                temp_begin = self.ui.daysbegin.date().toString('yyyyMMdd')
                 if is_valid_date(temp_begin):
-                    temp_end = self.ui.daysend.text()
+                    temp_end = self.ui.daysend.date().toString('yyyyMMdd')
                     if is_valid_date(temp_end):
                         if os.path.exists(DEFAULT_PICTURE_NAME):
                             os.remove(DEFAULT_PICTURE_NAME)

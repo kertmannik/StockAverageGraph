@@ -6,12 +6,12 @@ from datetime import date
 def set_begin_date():
     today = date.today()
     last_year = today.year - 1
-    return str(last_year) + "0101"
+    return QtCore.QDate(last_year, today.month, today.day)
 
 
 def set_end_date():
     today = date.today()
-    return today.strftime("%Y%m%d")
+    return QtCore.QDate(today.year, today.month, today.day)
 
 
 class Dialog(object):
@@ -33,15 +33,19 @@ class Dialog(object):
         self.uuesti.setGeometry(QtCore.QRect(270, 440, 93, 31))
         self.uuesti.setObjectName("uuesti")
 
-        self.daysend = QtWidgets.QLineEdit(Dialog)
-        self.daysend.setGeometry(QtCore.QRect(140, 440, 121, 31))
-        self.daysend.setObjectName("daysend")
-        self.daysend.setText(set_end_date())
-
-        self.daysbegin = QtWidgets.QLineEdit(Dialog)
+        self.daysbegin = QtWidgets.QDateEdit(Dialog)
+        self.daysbegin.setCalendarPopup(True)
         self.daysbegin.setGeometry(QtCore.QRect(10, 440, 121, 31))
         self.daysbegin.setObjectName("daysbegin")
-        self.daysbegin.setText(set_begin_date())
+        self.daysbegin.setDate(set_begin_date())
+
+        self.daysend = QtWidgets.QDateEdit(Dialog)
+        self.daysend.setCalendarPopup(True)
+        self.daysend.setGeometry(QtCore.QRect(140, 440, 121, 31))
+        self.daysend.setObjectName("daysend")
+        today = set_end_date()
+        self.daysend.setMaximumDate(today)
+        self.daysend.setDate(today)
 
         self.comboBox = QtWidgets.QComboBox(Dialog)
         self.comboBox.setGeometry(QtCore.QRect(440, 440, 161, 31))
