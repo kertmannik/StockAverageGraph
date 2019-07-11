@@ -53,7 +53,7 @@ class AppWindow(QDialog):
             QMessageBox.warning(None, "Veateade", str(exception))
 
     def set_default_average_days(self, days_from_ui):
-        default_days = 20
+        default_days = DEFAULT_DAYS
         try:
             days_from_ui = int(days_from_ui)
             if (days_from_ui < 2) or (len(self.data) < days_from_ui):
