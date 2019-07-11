@@ -45,25 +45,20 @@ class AppWindow(QDialog):
                             self.stock = self.ui.comboBox.currentData()
                             self.stock_index = self.ui.comboBox.currentIndex()
                             self.data = yahoo.load_yahoo_quote(self.stock, temp_begin, temp_end, info ='quote', format_output ='list')
-                        days = self.set_default_average_days(self.ui.daysaverage.text())
+                        days = self.is_valid_number(self.ui.daysaverage.text())
                         self.plot_generator.create_image(self.stock, days, self.data)
                         self.ui.pilt.setScaledContents(True)
                         self.ui.pilt.setPixmap(QPixmap(DEFAULT_PICTURE_NAME))
         except Exception as exception:
             QMessageBox.warning(None, "Veateade", str(exception))
 
-    def set_default_average_days(self, days_from_ui):
-        default_days = DEFAULT_DAYS
-        try:
-            days_from_ui = int(days_from_ui)
-            if (days_from_ui < 2) or (len(self.data) < days_from_ui):
-                self.ui.daysaverage.setText(str(default_days))
-                return default_days
-            return days_from_ui
-        except Exception as exception:
-            QMessageBox.warning(None, "Veateade", str(exception))
-            self.ui.daysaverage.setText(str(default_days))
-            return default_days
+    def is_valid_number(self, days_from_ui):
+        days_from_ui = int(days_from_ui)
+        if days_from_ui < 2:
+            raise Exception("Jooksva keskmise arvutamise päevi peab olema vähemalt 2!")
+        if (len(self.data) - 2) < days_from_ui:
+            raise Exception("Vaja pikemat ajaperioodi arvutamiseks!")
+        return days_from_ui
 
 
 app = QApplication(sys.argv)
