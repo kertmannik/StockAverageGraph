@@ -3,13 +3,18 @@ from Variables.variables import *
 from datetime import date
 
 
-def set_begin_date():
+def get_last_year_same_date():
     today = date.today()
     last_year = today.year - 1
     return QtCore.QDate(last_year, today.month, today.day)
 
 
-def set_end_date():
+def get_yesterday_date():
+    today = date.today()
+    return QtCore.QDate(today.year, today.month, today.day - 1)
+
+
+def get_today_date():
     today = date.today()
     return QtCore.QDate(today.year, today.month, today.day)
 
@@ -37,13 +42,14 @@ class Dialog(object):
         self.daysbegin.setCalendarPopup(True)
         self.daysbegin.setGeometry(QtCore.QRect(10, 440, 121, 31))
         self.daysbegin.setObjectName("daysbegin")
-        self.daysbegin.setDate(set_begin_date())
+        self.daysbegin.setDate(get_last_year_same_date())
+        self.daysbegin.setMaximumDate(get_yesterday_date())
 
         self.daysend = QtWidgets.QDateEdit(Dialog)
         self.daysend.setCalendarPopup(True)
         self.daysend.setGeometry(QtCore.QRect(140, 440, 121, 31))
         self.daysend.setObjectName("daysend")
-        today = set_end_date()
+        today = get_today_date()
         self.daysend.setMaximumDate(today)
         self.daysend.setDate(today)
 
