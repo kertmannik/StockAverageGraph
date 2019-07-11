@@ -29,7 +29,7 @@ class AppWindow(QDialog):
         self.ui.uuesti.clicked.connect(lambda: self.display_data(True))
         self.ui.display.clicked.connect(lambda: self.display_data(False))
 
-    def display_data(self, again):
+    def display_data(self, recalculate):
         try:
             if self.ui.comboBox.currentData() is not None:
                 temp_begin = self.ui.daysbegin.text()
@@ -38,7 +38,7 @@ class AppWindow(QDialog):
                     if is_valid_date(temp_end):
                         if os.path.exists(DEFAULT_PICTURE_NAME):
                             os.remove(DEFAULT_PICTURE_NAME)
-                        if again:
+                        if recalculate:
                             if self.stock_index is not self.ui.comboBox.currentIndex():
                                 self.ui.comboBox.setCurrentIndex(self.stock_index)
                         else:
