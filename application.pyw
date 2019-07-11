@@ -46,7 +46,7 @@ class AppWindow(QDialog):
                             self.stock_index = self.ui.comboBox.currentIndex()
                             self.data = yahoo.load_yahoo_quote(self.stock, temp_begin, temp_end, info ='quote', format_output ='list')
                         days = self.is_valid_number(self.ui.daysaverage.text())
-                        self.plot_generator.create_image(self.stock, days, self.data)
+                        self.plot_generator.create_image(self.stock, days, self.data, recalculate)
                         self.ui.pilt.setScaledContents(True)
                         self.ui.pilt.setPixmap(QPixmap(DEFAULT_PICTURE_NAME))
         except Exception as exception:
