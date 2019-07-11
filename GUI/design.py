@@ -63,13 +63,13 @@ class Dialog(object):
 
     def fill_combobox(self):
         with open(DEFAULT_STOCKS_FILENAME, 'r') as file:
-            file = file.read().replace('\n', 'uusrida')
-            stocks = file.split("uusrida")
+            stocks = file.read().split('\n')
 
         if stocks is not None and len(stocks) > 0:
             self.comboBox.blockSignals(True)
             self.comboBox.addItem("")
             for stock in stocks:
                 data = stock.split(",")
-                self.comboBox.addItem(data[0], data[1])
+                if len(data) == 2:
+                    self.comboBox.addItem(data[0], data[1])
             self.comboBox.blockSignals(False)
