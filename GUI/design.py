@@ -1,5 +1,18 @@
 from PyQt5 import QtCore, QtWidgets
 from Variables.variables import *
+from datetime import date
+
+
+def set_begin_date():
+    today = date.today()
+    last_year = today.year - 1
+    return str(last_year) + "0101"
+
+
+def set_end_date():
+    today = date.today()
+    return today.strftime("%Y%m%d")
+
 
 class Dialog(object):
     def setupUi(self, Dialog):
@@ -23,10 +36,12 @@ class Dialog(object):
         self.daysend = QtWidgets.QLineEdit(Dialog)
         self.daysend.setGeometry(QtCore.QRect(140, 440, 121, 31))
         self.daysend.setObjectName("daysend")
+        self.daysend.setText(set_end_date())
 
         self.daysbegin = QtWidgets.QLineEdit(Dialog)
         self.daysbegin.setGeometry(QtCore.QRect(10, 440, 121, 31))
         self.daysbegin.setObjectName("daysbegin")
+        self.daysbegin.setText(set_begin_date())
 
         self.comboBox = QtWidgets.QComboBox(Dialog)
         self.comboBox.setGeometry(QtCore.QRect(440, 440, 161, 31))
