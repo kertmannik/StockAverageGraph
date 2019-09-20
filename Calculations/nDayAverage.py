@@ -7,13 +7,15 @@ class MovingAverage:
 
     def get_closing_prices(self, raw_data):
         prices = []
+        labels = []
         raw_data.pop(0)
 
         for line in raw_data:
             items = line.split(",")
             if len(items) == 7 and items[4] != "null":
+                labels.append(str(items[0]))
                 prices.append(float(items[4]))
-        return prices
+        return prices, labels
 
     def get_average_prices(self, real, days):
         average = []

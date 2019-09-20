@@ -6,15 +6,30 @@ class PlotGenerator():
     def __init__(self, moving_average):
         self.moving_average = moving_average
         self.closing_prices = None
+        self.axis_labels = None
 
     def create_image(self, stock_name, days, raw_data, recalculate):
         if not recalculate:
-            self.closing_prices = self.moving_average.get_closing_prices(raw_data)
+            self.closing_prices, self.axis_labels = self.moving_average.get_closing_prices(raw_data)
         average_prices = self.moving_average.get_average_prices(self.closing_prices, days)
 
         plt.title(stock_name)
         plt.plot(average_prices)
         plt.plot(self.closing_prices)
+        self.set_labels(plt)
         plt.legend([str(days) + ' päeva jooksev keskmine', 'reaalne'], loc='upper left')
         plt.savefig(DEFAULT_PICTURE_NAME)
         plt.clf()
+
+    def set_labels(self, plt):
+        step_amount = int(len(self.closing_prices) / (DEFAULT_LABEL_AMOUNT * 2))
+        indexes = []
+        for i in range(1, DEFAULT_LABEL_AMOUNT * 2, 2):
+            indexes.append(step_amount * i)
+        plt.xticks(indexes, self.extract_labels(indexes, self.axis_labels))
+
+    def extract_labels(self, indexes, all_labels):
+        labels = []
+        for position in indexes:
+            labels.append(all_labels[position])
+        return labels
