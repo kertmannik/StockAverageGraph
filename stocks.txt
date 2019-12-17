@@ -2,6 +2,7 @@ Apranga,APG1L.VS
 Arco Vara,ARC1T.TL
 AUGA group,AUG1L.VS
 Baltika,BLT1T.TL
+Coop Pank,CPA1T.TL
 EfTEN Real Estate Fund III,EFT1T.TL
 Ekspress Grupp,EEG1T.TL
 Energijos Skirstymo Operatorius,ESO1L.VS
