@@ -6,6 +6,7 @@ from Yahoo import request as yahoo
 from GUI.design import Dialog
 from GUI.plotGenerator import PlotGenerator
 from Calculations.nDayAverage import MovingAverage
+from Calculations.growth import Growth
 from Variables.variables import *
 
 
@@ -24,7 +25,8 @@ class AppWindow(QDialog):
         self.data = None
 
         self.moving_average = MovingAverage()
-        self.plot_generator = PlotGenerator(MovingAverage())
+        self.growth = Growth()
+        self.plot_generator = PlotGenerator(self.moving_average, self.growth)
 
         self.ui.uuesti.clicked.connect(lambda: self.display_data(True))
         self.ui.display.clicked.connect(lambda: self.display_data(False))
