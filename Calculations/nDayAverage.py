@@ -5,18 +5,6 @@ class MovingAverage:
     def last_n_days(self, days, index, N):
         return days[index-(N-1):index]
 
-    def get_closing_prices(self, raw_data):
-        prices = []
-        labels = []
-        raw_data.pop(0)
-
-        for line in raw_data:
-            items = line.split(",")
-            if len(items) == 7 and items[4] != "null":
-                labels.append(str(items[0]))
-                prices.append(float(items[4]))
-        return prices, labels
-
     def get_average_prices(self, real, days):
         average = []
         for index, item in enumerate(real):

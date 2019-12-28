@@ -9,9 +9,10 @@ class PlotGenerator():
         self.closing_prices = None
         self.axis_labels = None
 
-    def create_image(self, stock_name, days, raw_data, recalculate):
+    def create_image(self, stock_name, days, closing_prices, axis_labels, recalculate):
         if not recalculate:
-            self.closing_prices, self.axis_labels = self.moving_average.get_closing_prices(raw_data)
+            self.closing_prices = closing_prices
+            self.axis_labels = axis_labels
         average_prices = self.moving_average.get_average_prices(self.closing_prices, days)
 
         plt.title(self.compose_title(stock_name))
