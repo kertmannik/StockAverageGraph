@@ -7,7 +7,5 @@ def load_yahoo_quote(ticker, begindate, enddate):
     df = panda.DataFrame(ticker.history(start=begindate, end=enddate,actions=False))
     close_prices = df.get('Close').tolist()
     timestamps = df.index.tolist()
-    dates = []
-    for timestamp in timestamps:
-        dates.append(timestamp.date().strftime("%d-%m-%Y"))
+    dates = list(map(lambda timestamp: timestamp.date().strftime("%d-%m-%Y"), timestamps))
     return close_prices, dates
