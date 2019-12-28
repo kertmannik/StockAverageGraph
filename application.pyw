@@ -20,6 +20,9 @@ class AppWindow(QDialog):
         self.ui = Dialog()
         self.ui.setupUi(self)
 
+        self.closing_prices = None
+        self.dates = None
+
         self.stock = None
         self.stock_index = None
 
@@ -45,19 +48,19 @@ class AppWindow(QDialog):
                         else:
                             self.stock = self.ui.comboBox.currentData()
                             self.stock_index = self.ui.comboBox.currentIndex()
-                            closing_prices, axis_labels = yahoo.load_yahoo_quote(self.stock, temp_begin, temp_end)
-                        days = self.is_valid_number(self.ui.daysaverage.text(), closing_prices)
-                        self.plot_generator.create_image(self.stock, days, closing_prices, axis_labels, recalculate)
+                            self.closing_prices, self.dates = yahoo.load_yahoo_quote(self.stock, temp_begin, temp_end)
+                        days = self.is_valid_number(self.ui.daysaverage.text())
+                        self.plot_generator.create_image(self.stock, days, self.closing_prices, self.dates, recalculate)
                         self.ui.pilt.setScaledContents(True)
                         self.ui.pilt.setPixmap(QPixmap(DEFAULT_PICTURE_NAME))
         except Exception as exception:
             QMessageBox.warning(None, "Veateade", str(exception))
 
-    def is_valid_number(self, days_from_ui, closing_prices):
+    def is_valid_number(self, days_from_ui):
         days_from_ui = int(days_from_ui)
         if days_from_ui < 2:
             raise Exception("Jooksva keskmise arvutamise päevi peab olema vähemalt 2!")
-        if (len(closing_prices) - 2) < days_from_ui:
+        if (len(self.closing_prices) - 2) < days_from_ui:
             raise Exception("Vaja pikemat ajaperioodi arvutamiseks!")
         return days_from_ui
 
