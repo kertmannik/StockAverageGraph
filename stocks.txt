@@ -33,3 +33,7 @@ Tallinna Vesi,TVEAT.TL
 Telia Lietuva,TEL1L.VS
 Vilkyðkiø pieninë,VLP1L.VS
 Vanguard FTSE All-World UCITS ETF,VWRL.AS
+Nike,NKE
+Amazon,AMZN
+Berkshire Hathaway Inc,BRK.B
+Tesla,TSLA
