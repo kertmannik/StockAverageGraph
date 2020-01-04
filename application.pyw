@@ -46,9 +46,10 @@ class AppWindow(QDialog):
                             if self.stock_index is not self.ui.comboBox.currentIndex():
                                 self.ui.comboBox.setCurrentIndex(self.stock_index)
                         else:
-                            self.stock = self.ui.comboBox.currentData()
+                            stock_name = self.ui.comboBox.currentData()
+                            self.closing_prices, self.dates = yahoo.load_yahoo_quote(stock_name, temp_begin, temp_end)
+                            self.stock = stock_name
                             self.stock_index = self.ui.comboBox.currentIndex()
-                            self.closing_prices, self.dates = yahoo.load_yahoo_quote(self.stock, temp_begin, temp_end)
                         days = self.is_valid_number(self.ui.daysaverage.text())
                         self.plot_generator.create_image(self.stock, days, self.closing_prices, self.dates, recalculate)
                         self.ui.pilt.setScaledContents(True)
@@ -58,6 +59,8 @@ class AppWindow(QDialog):
 
     def is_valid_number(self, days_from_ui):
         days_from_ui = int(days_from_ui)
+        if self.closing_prices is None:
+            raise Exception("Puuduvad andmed arvutamiseks!")
         if days_from_ui < 2:
             raise Exception("Jooksva keskmise arvutamise päevi peab olema vähemalt 2!")
         if (len(self.closing_prices) - 2) < days_from_ui:

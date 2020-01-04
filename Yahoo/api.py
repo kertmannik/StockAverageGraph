@@ -8,4 +8,6 @@ def load_yahoo_quote(ticker, begindate, enddate):
     close_prices = df.get('Close').tolist()
     timestamps = df.index.tolist()
     dates = list(map(lambda timestamp: timestamp.date().strftime("%d-%m-%Y"), timestamps))
+    if len(dates) == 0 and len(close_prices) == 0:
+        raise Exception("Ei leidnud väärtpaberit!")
     return close_prices, dates
