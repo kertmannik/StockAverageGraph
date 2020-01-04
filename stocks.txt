@@ -10,7 +10,7 @@ Grigeo,GRG1L.VS
 Grindeks,GRD1R.RG
 HansaMatrix,HMX1R.RG
 Harju Elekter,HAE1T.TL
-Klaipëdos nafta,KNF1L.VS
+Klaipï¿½dos nafta,KNF1L.VS
 LHV Group,LHV1T.TL
 Lietuvos energijos gamyba,LNR1L.VS
 Linas Agro Group,LNA1L.VS
@@ -18,22 +18,22 @@ Merko Ehitus,MRK1T.TL
 Nordecon,NCN1T.TL
 Novaturas,NTU1L.VS
 Olainfarm,OLF1R.RG
-Panevëþio statybos trestas,PTR1L.VS
-Pieno þvaigþdës,PZV1L.VS
+Panevï¿½ï¿½io statybos trestas,PTR1L.VS
+Pieno ï¿½vaigï¿½dï¿½s,PZV1L.VS
 PRFoods,PRF1T.TL
 Pro Kapital Grupp,PKG1T.TL
-Rokiðkio sûris,RSU1L.VS
+Rokiï¿½kio sï¿½ris,RSU1L.VS
 SAF Tehnika,SAF1R.RG
 Silvano Fashion Group,SFG1T.TL
-Ðiauliø bankas,SAB1L.VS
+ï¿½iauliï¿½ bankas,SAB1L.VS
 Tallink Grupp,TAL1T.TL
 Tallinna Kaubamaja Grupp,TKM1T.TL
 Tallinna Sadam,TSM1T.TL
 Tallinna Vesi,TVEAT.TL
 Telia Lietuva,TEL1L.VS
-Vilkyðkiø pieninë,VLP1L.VS
+Vilkyï¿½kiï¿½ pieninï¿½,VLP1L.VS
 Vanguard FTSE All-World UCITS ETF,VWRL.AS
 Nike,NKE
 Amazon,AMZN
-Berkshire Hathaway Inc,BRK.B
+Berkshire Hathaway Inc,BRK-B
 Tesla,TSLA
