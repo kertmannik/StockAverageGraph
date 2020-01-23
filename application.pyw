@@ -52,6 +52,7 @@ class AppWindow(QDialog):
                             self.stock_index = self.ui.comboBox.currentIndex()
                         days = self.is_valid_number(self.ui.daysaverage.text())
                         self.plot_generator.create_image(self.stock, days, self.closing_prices, self.dates, recalculate)
+                        self.ui.update_start_time(self.dates[0])
                         self.ui.pilt.setScaledContents(True)
                         self.ui.pilt.setPixmap(QPixmap(DEFAULT_PICTURE_NAME))
         except Exception as exception:

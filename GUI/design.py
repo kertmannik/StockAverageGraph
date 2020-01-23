@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QCompleter
 
 from Variables.variables import *
 from datetime import date
+from datetime import datetime
 
 
 def get_last_year_same_date():
@@ -94,4 +95,9 @@ class Dialog(object):
                     completer_list.append(name)
             self.comboBox.blockSignals(False)
             return completer_list
+
+    def update_start_time(self, start_date):
+        strftime = datetime.strptime(start_date, "%d-%m-%Y")
+        q_date = QtCore.QDate(strftime.year, strftime.month, strftime.day)
+        self.daysbegin.setDate(q_date)
 
