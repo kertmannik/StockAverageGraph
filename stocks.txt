@@ -1,6 +1,7 @@
 EfTEN Real Estate Fund III,EFT1T.TL
 LHV Group,LHV1T.TL
 Tesla,TSLA
+Taiwan Semiconductor Manufacturing Company Limited,TSM
 3M Company,MMM
 A.O. Smith Corp,AOS
 Abbott Laboratories,ABT
