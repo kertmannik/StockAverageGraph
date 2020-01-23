@@ -1,4 +1,7 @@
 from PyQt5 import QtCore, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QCompleter
+
 from Variables.variables import *
 from datetime import date
 
@@ -56,6 +59,10 @@ class Dialog(object):
         self.comboBox = QtWidgets.QComboBox(Dialog)
         self.comboBox.setGeometry(QtCore.QRect(440, 440, 161, 31))
         self.comboBox.setObjectName("comboBox")
+        self.completer = QCompleter(self.fill_combobox())
+        self.completer.setCaseSensitivity(Qt.CaseInsensitive)
+        self.comboBox.setEditable(True)
+        self.comboBox.setCompleter(self.completer)
 
         self.display = QtWidgets.QPushButton(Dialog)
         self.display.setGeometry(QtCore.QRect(620, 440, 71, 31))
@@ -63,7 +70,6 @@ class Dialog(object):
 
         self.retranslate_ui(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
-        self.fill_combobox()
 
     def retranslate_ui(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
@@ -76,10 +82,16 @@ class Dialog(object):
             stocks = file.read().split('\n')
 
         if stocks is not None and len(stocks) > 0:
+            completer_list = []
             self.comboBox.blockSignals(True)
             self.comboBox.addItem("")
             for stock in stocks:
                 data = stock.split(",")
                 if len(data) == 2:
-                    self.comboBox.addItem(data[0], data[1])
+                    name = data[0]
+                    symbol = data[1]
+                    self.comboBox.addItem(name, symbol)
+                    completer_list.append(name)
             self.comboBox.blockSignals(False)
+            return completer_list
+
