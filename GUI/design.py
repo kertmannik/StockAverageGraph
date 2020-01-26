@@ -62,6 +62,7 @@ class Dialog(object):
         self.comboBox.setObjectName("comboBox")
         self.completer = QCompleter(self.fill_combobox())
         self.completer.setCaseSensitivity(Qt.CaseInsensitive)
+        self.completer.setFilterMode(Qt.MatchContains)
         self.comboBox.setEditable(True)
         self.comboBox.setCompleter(self.completer)
 
