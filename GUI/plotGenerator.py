@@ -15,7 +15,7 @@ class PlotGenerator():
             self.axis_labels = axis_labels
         average_prices = self.moving_average.get_average_prices(self.closing_prices, days)
 
-        plt.title(self.compose_title(stock_name))
+        plt.title(self.compose_title(stock_name, closing_prices[0], closing_prices[-1]))
         plt.plot(average_prices)
         plt.plot(self.closing_prices)
         self.set_labels(plt)
@@ -36,8 +36,8 @@ class PlotGenerator():
             labels.append(all_labels[position])
         return labels
 
-    def compose_title(self, name):
+    def compose_title(self, name, start_price, end_price):
         first_day_price = self.closing_prices[0]
         last_day_price = self.closing_prices[len(self.closing_prices) - 1]
         growth = self.growth.get_growth(first_day_price, last_day_price)
-        return str(name) + " " + str(growth) + "%"
+        return str(name) + "\n" + str(growth) + "%" + " | " + str(start_price) + "/" + str(end_price)
